@@ -31,9 +31,22 @@ def find_rooms(after_hour: int, minimum_capacity: int = 1) -> dict:
 
 
 async def slow_find_rooms(after_hour: int, minimum_capacity: int = 1) -> dict:
-    """Find rooms slowly so voice-agent latency and failure recovery can be tested."""
-    await asyncio.sleep(5)
-    if os.getenv("ROOM_TOOL_FAIL") == "1" or after_hour == 13:
-        raise RuntimeError("The room service is temporarily unavailable")
-    return find_rooms(after_hour=after_hour, minimum_capacity=minimum_capacity)
+    """Find rooms slowly so voice-agent latency and failure recovery can be tested.
 
+    Args:
+        after_hour: Earliest acceptable hour, from 0 to 23.
+        minimum_capacity: Minimum number of people the room must hold.
+
+    The simulated service failure is returned as a structured tool result. This lets
+    the agent explain the problem without receiving or repeating implementation
+    details from a Python exception.
+    """
+    delay_seconds = float(os.getenv("ROOM_TOOL_DELAY_SECONDS", "5"))
+    await asyncio.sleep(max(0, delay_seconds))
+    if os.getenv("ROOM_TOOL_FAIL") == "1" or after_hour == 13:
+        return {
+            "status": "error",
+            "message": "Room availability could not be checked right now.",
+            "retryable": True,
+        }
+    return find_rooms(after_hour=after_hour, minimum_capacity=minimum_capacity)

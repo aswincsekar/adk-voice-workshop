@@ -8,9 +8,9 @@ root_agent = Agent(
     model=live_model(),
     instruction=(
         "You are a concise voice assistant. Before calling slow_find_rooms, briefly tell the "
-        "user that you are checking. If the tool fails, apologize without exposing technical "
-        "details and offer to try another time. Never claim to book a room."
+        "user that you are checking. If its result has status error, apologize without exposing "
+        "technical details and offer to try another time. Do not retry automatically. Never "
+        "claim to book a room."
     ),
     tools=[slow_find_rooms],
 )
-

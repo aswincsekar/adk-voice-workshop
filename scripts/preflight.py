@@ -19,15 +19,26 @@ def check(ok: bool, label: str, help_text: str) -> None:
     raise SystemExit(1)
 
 
-check(sys.version_info >= (3, 11), "Python", "install Python 3.11 or newer")
+check(
+    (3, 11) <= sys.version_info[:2] < (3, 14),
+    "Python 3.11–3.13",
+    "install a supported Python version (3.11, 3.12, or 3.13)",
+)
 check(importlib.util.find_spec("google.adk") is not None, "Dependencies", "run: uv sync")
 
-key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY", "")
-check(bool(key and key != "replace_me"), "API key configuration", "copy .env.example to .env")
+keys = [os.getenv("GEMINI_API_KEY", ""), os.getenv("GOOGLE_API_KEY", "")]
 check(
-    os.getenv("GOOGLE_GENAI_USE_ENTERPRISE", "FALSE").upper() == "FALSE",
+    any(key and key != "replace_me" for key in keys),
+    "API key configuration",
+    "copy .env.example to .env and add an AI Studio key",
+)
+check(
+    all(
+        os.getenv(name, "FALSE").upper() in {"FALSE", "0"}
+        for name in ("GOOGLE_GENAI_USE_ENTERPRISE", "GOOGLE_GENAI_USE_VERTEXAI")
+    ),
     "AI Studio mode",
-    "set GOOGLE_GENAI_USE_ENTERPRISE=FALSE",
+    "set GOOGLE_GENAI_USE_ENTERPRISE=FALSE and GOOGLE_GENAI_USE_VERTEXAI=FALSE",
 )
 
 expected = [f"checkpoints/{name}" for name in [

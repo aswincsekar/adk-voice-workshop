@@ -15,13 +15,28 @@ def test_find_rooms_rejects_invalid_hour():
 
 def test_slow_tool_can_fail(monkeypatch):
     monkeypatch.setenv("ROOM_TOOL_FAIL", "1")
+    monkeypatch.setenv("ROOM_TOOL_DELAY_SECONDS", "0")
+
+    async def run():
+        result = await slow_find_rooms(15)
+        assert result == {
+            "status": "error",
+            "message": "Room availability could not be checked right now.",
+            "retryable": True,
+        }
+
+    asyncio.run(run())
+
+
+def test_slow_tool_has_a_deliberate_delay(monkeypatch):
+    monkeypatch.delenv("ROOM_TOOL_FAIL", raising=False)
+    monkeypatch.setenv("ROOM_TOOL_DELAY_SECONDS", "5")
 
     async def run():
         try:
             await asyncio.wait_for(slow_find_rooms(15), timeout=0.01)
         except TimeoutError:
-            return  # The deliberate delay is present.
+            return
         raise AssertionError("slow_find_rooms should not finish immediately")
 
     asyncio.run(run())
-

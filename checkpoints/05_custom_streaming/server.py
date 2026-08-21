@@ -78,11 +78,12 @@ async def agent_to_browser(websocket: WebSocket, events) -> None:
             )
 
         for part in (event.content.parts if event.content and event.content.parts else []):
-            if part.inline_data and part.inline_data.mime_type.startswith("audio/pcm"):
+            mime_type = part.inline_data.mime_type if part.inline_data else None
+            if part.inline_data and mime_type and mime_type.startswith("audio/pcm"):
                 await websocket.send_json(
                     {
                         "type": "audio",
-                        "mime_type": part.inline_data.mime_type,
+                        "mime_type": mime_type,
                         "data": base64.b64encode(part.inline_data.data).decode("ascii"),
                     }
                 )

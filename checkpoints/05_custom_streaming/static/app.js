@@ -43,7 +43,13 @@ function downsampleToPcm16(input, inputRate, outputRate = 16000) {
   return new Uint8Array(output.buffer);
 }
 
-function playPcm(base64, sampleRate = 24000) {
+function sampleRateFromMimeType(mimeType, fallback = 24000) {
+  const match = /(?:^|;)\s*rate=(\d+)/i.exec(mimeType || "");
+  return match ? Number(match[1]) : fallback;
+}
+
+function playPcm(base64, mimeType) {
+  const sampleRate = sampleRateFromMimeType(mimeType);
   const bytes = bytesFromBase64(base64);
   const samples = new Int16Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 2);
   const buffer = audioContext.createBuffer(1, samples.length, sampleRate);
@@ -80,7 +86,7 @@ async function connect() {
   });
   socket.addEventListener("message", event => {
     const message = JSON.parse(event.data);
-    if (message.type === "audio") playPcm(message.data);
+    if (message.type === "audio") playPcm(message.data, message.mime_type);
     if (message.type === "transcript") addEvent(`${message.speaker}: ${message.text}`, message.speaker);
     if (message.type === "tool") addEvent(`tool ${message.phase}: ${message.name}`, "tool");
     if (message.type === "interrupted") {

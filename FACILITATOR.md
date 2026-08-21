@@ -19,7 +19,12 @@
 - “Find a room tomorrow afternoon.”
 - Interrupt: “Actually—make it after three.”
 - “Book it.” (The agent should clarify that this demo only finds rooms.)
-- Failure demo: “Find a room after one.”
+- Failure demo: “Find a room after one p.m.”
+
+For checkpoint 04, “after one p.m.” means 13:00 and intentionally returns a
+structured failure after five seconds. The agent should acknowledge the wait,
+apologize briefly, and offer another time without exposing an exception or
+retrying automatically.
 
 ## Key distribution
 
@@ -34,4 +39,3 @@ The safest option is participant-owned AI Studio keys. If sharing one workshop k
 ## 45-minute fallback
 
 Skip live-coding the custom WebSocket server. Show its four highlighted functions and keep the voice exercise and slow-tool demo.
-

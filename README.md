@@ -42,9 +42,10 @@ uv run python scripts/preflight.py
 Expected result:
 
 ```text
-✓ Python
+✓ Python 3.11–3.13
 ✓ Dependencies
 ✓ API key configuration
+✓ AI Studio mode
 ✓ Workshop checkpoints
 READY
 ```
@@ -78,6 +79,18 @@ Open the printed local URL, select `room_agent`, allow microphone access, and sa
 > Find a room after three.
 
 The native-audio model is voice-first. Use the microphone rather than the text box in the voice checkpoints.
+
+Slow/failure demo:
+
+```bash
+cd checkpoints/04_slow_failure
+uv run adk web
+```
+
+Ask for a room after three to hear the deliberate five-second delay. Ask for a
+room after one p.m. (13:00), or set `ROOM_TOOL_FAIL=1`, to trigger the friendly
+failure path. The tool returns a structured error; the agent should not expose a
+Python exception or retry without asking.
 
 ## Workshop map
 
