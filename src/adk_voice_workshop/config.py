@@ -10,9 +10,8 @@ load_dotenv(REPO_ROOT / ".env")
 
 
 def text_model() -> str:
-    return os.getenv("TEXT_MODEL", "gemini-2.5-flash")
+    return os.getenv("TEXT_MODEL", "gemini-3.6-flash")
 
 
 def live_model() -> str:
     return os.getenv("LIVE_MODEL", "gemini-3.1-flash-live-preview")
-

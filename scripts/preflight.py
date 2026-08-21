@@ -22,7 +22,7 @@ def check(ok: bool, label: str, help_text: str) -> None:
 check(sys.version_info >= (3, 11), "Python", "install Python 3.11 or newer")
 check(importlib.util.find_spec("google.adk") is not None, "Dependencies", "run: uv sync")
 
-key = os.getenv("GOOGLE_API_KEY", "")
+key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY", "")
 check(bool(key and key != "replace_me"), "API key configuration", "copy .env.example to .env")
 check(
     os.getenv("GOOGLE_GENAI_USE_ENTERPRISE", "FALSE").upper() == "FALSE",
@@ -36,4 +36,3 @@ expected = [f"checkpoints/{name}" for name in [
 check(all((ROOT / folder).is_dir() for folder in expected), "Workshop checkpoints", "re-clone repo")
 
 print("READY")
-

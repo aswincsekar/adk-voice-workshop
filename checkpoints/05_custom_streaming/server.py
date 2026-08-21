@@ -113,7 +113,12 @@ async def voice_socket(websocket: WebSocket) -> None:
         input_audio_transcription=types.AudioTranscriptionConfig(),
         output_audio_transcription=types.AudioTranscriptionConfig(),
     )
-    events = runner.run_live(session=session, live_request_queue=queue, run_config=run_config)
+    events = runner.run_live(
+        user_id=user_id,
+        session_id=session.id,
+        live_request_queue=queue,
+        run_config=run_config,
+    )
 
     upstream = asyncio.create_task(browser_to_agent(websocket, queue))
     downstream = asyncio.create_task(agent_to_browser(websocket, events))

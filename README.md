@@ -28,7 +28,8 @@ You need:
 git clone <WORKSHOP_REPO_URL>
 cd adk-voice-workshop
 cp .env.example .env
-# Put the workshop key in .env. Never commit or paste it in chat.
+# Put the workshop key in GEMINI_API_KEY (or GOOGLE_API_KEY) in .env.
+# Never commit or paste it in chat.
 uv sync
 uv run python scripts/preflight.py
 ```
@@ -97,7 +98,8 @@ Open [http://localhost:8001](http://localhost:8001), click **Connect microphone*
 
 ## API-key safety for a workshop
 
-- Never commit the key. `.env` is ignored by Git.
+- Never commit the key. `.env` is ignored by Git. Both `GEMINI_API_KEY` and
+  `GOOGLE_API_KEY` are accepted by the workshop.
 - Prefer a dedicated workshop key and project, with the smallest practical quota.
 - Give the key only to registered participants and rotate/delete it immediately after the session.
 - Expect preview Live API models to have tighter quotas than text models.
@@ -117,5 +119,6 @@ Open [http://localhost:8001](http://localhost:8001), click **Connect microphone*
 - [ADK Python streaming guide](https://adk.dev/live/get-started/streaming-python/)
 - [Gemini Live API quickstart](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk)
 - [Gemini 3.1 Flash Live model](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview)
+- [Latest Gemini text models](https://ai.google.dev/gemini-api/docs/latest-model)
 
 `adk web` is a development and workshop UI, not a production deployment.
