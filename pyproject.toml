@@ -1,0 +1,37 @@
+[project]
+name = "adk-voice-workshop"
+version = "0.1.0"
+description = "Guided workshop: build a voice agent with Google ADK"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "certifi>=2025.1.31",
+  "fastapi>=0.116,<1",
+  "google-adk>=2.3,<3",
+  "python-dotenv>=1.1,<2",
+  "uvicorn[standard]>=0.35,<1",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.4,<9",
+  "ruff>=0.12,<1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/adk_voice_workshop"]
+

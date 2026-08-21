@@ -1,0 +1,2 @@
+"""Optional custom streaming checkpoint."""
+
