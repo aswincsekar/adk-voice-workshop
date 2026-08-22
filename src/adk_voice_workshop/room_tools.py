@@ -2,6 +2,10 @@ from __future__ import annotations
 
 import asyncio
 import os
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 ROOMS = [
     {"name": "Orchid", "available_from": 15, "capacity": 4},
@@ -44,6 +48,7 @@ async def slow_find_rooms(after_hour: int, minimum_capacity: int = 1) -> dict:
     delay_seconds = float(os.getenv("ROOM_TOOL_DELAY_SECONDS", "5"))
     await asyncio.sleep(max(0, delay_seconds))
     if os.getenv("ROOM_TOOL_FAIL") == "1" or after_hour == 13:
+        logger.error("Room availability could not be checked right now.")
         return {
             "status": "error",
             "message": "Room availability could not be checked right now.",
