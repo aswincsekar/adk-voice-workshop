@@ -14,6 +14,7 @@ A guided Python workshop that goes from a tiny typed-prompt agent to a real-time
 3. A voice agent in the ADK development UI
 4. A slow/failing tool experiment
 5. An optional FastAPI + WebSocket streaming app
+6. A production-hardening pass on the custom streaming web app
 
 Every stage has a runnable checkpoint. If you get stuck, jump to the next folder and continue.
 
@@ -110,6 +111,7 @@ Python exception or retry without asking.
 | `03_voice` | Enable voice | Switch to the Live API model and use the microphone |
 | `04_slow_failure` | Break it | Slow tool, timeout, and failure experiment |
 | `05_custom_streaming` | Look underneath | `run_live`, `LiveRequestQueue`, WebSocket, audio, events, transcription |
+| `06_production` | Harden it | Add WebSocket controls, session resilience, budgets, and safe logging |
 
 ## Run the custom streaming app
 
@@ -121,6 +123,18 @@ uv run uvicorn server:app --reload --port 8001
 ```
 
 Open [http://localhost:8001](http://localhost:8001), click **Connect microphone**, and use headphones.
+
+## Run the production-hardening checkpoint
+
+```bash
+cd checkpoints/06_production
+uv run uvicorn server:app --reload --port 8002
+```
+
+Open [http://localhost:8002](http://localhost:8002). This checkpoint hardens
+the custom streaming server from checkpoint 05. See
+[`checkpoints/06_production/README.md`](checkpoints/06_production/README.md) for
+the implemented controls and the infrastructure still required before a real deployment.
 
 ## API-key safety for a workshop
 

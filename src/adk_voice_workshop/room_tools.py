@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import asyncio
-import os
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)

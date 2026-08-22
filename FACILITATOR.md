@@ -14,6 +14,11 @@
 | 46–53 | You do | any | Mini challenge |
 | 53–55 | Together | wrap | One production takeaway |
 
+For a 60-minute session, use minutes 55–60 to compare the servers in
+`05_custom_streaming` and `06_production`. Highlight origin and payload checks,
+session resumption, context compression, call budgets, safe logs, and cleanup.
+Emphasize that production behavior comes from system controls, not prompt wording.
+
 ## Demo prompts
 
 - “Find a room tomorrow afternoon.”

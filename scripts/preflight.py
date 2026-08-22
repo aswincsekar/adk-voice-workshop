@@ -53,7 +53,8 @@ check(
 )
 
 expected = [f"checkpoints/{name}" for name in [
-    "00_start", "01_basic", "02_tool", "03_voice", "04_slow_failure", "05_custom_streaming"
+    "00_start", "01_basic", "02_tool", "03_voice", "04_slow_failure",
+    "05_custom_streaming", "06_production"
 ]]
 check(all((ROOT / folder).is_dir() for folder in expected), "Workshop checkpoints", "re-clone repo")
 
