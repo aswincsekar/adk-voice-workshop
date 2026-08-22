@@ -21,9 +21,10 @@
 - “Book it.” (The agent should clarify that this demo only finds rooms.)
 - Failure demo: “Find a room after one p.m.”
 
-All checkpoints use `gemini-3.1-flash-live-preview` because current ADK Web
-opens a Live API WebSocket. Keep checkpoints 00–02 as typed-prompt exercises;
-introduce microphone input and native audio at checkpoint 03.
+Checkpoints 00–02 use `gemini-3.6-flash` through ADK Web's text/SSE path. Ask
+participants not to start microphone/audio mode there: it opens `/run_live`,
+which a text-only model cannot use. Checkpoint 03 switches to
+`gemini-3.1-flash-live-preview` and introduces the microphone and native audio.
 
 For checkpoint 04, “after one p.m.” means 13:00 and intentionally returns a
 structured failure after five seconds. The agent should acknowledge the wait,

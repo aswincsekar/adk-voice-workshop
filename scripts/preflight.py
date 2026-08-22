@@ -41,6 +41,11 @@ check(
     "set GOOGLE_GENAI_USE_ENTERPRISE=FALSE and GOOGLE_GENAI_USE_VERTEXAI=FALSE",
 )
 check(
+    os.getenv("TEXT_MODEL", "gemini-3.6-flash") == "gemini-3.6-flash",
+    "Text model",
+    "set TEXT_MODEL=gemini-3.6-flash in .env",
+)
+check(
     os.getenv("LIVE_MODEL", "gemini-3.1-flash-live-preview")
     == "gemini-3.1-flash-live-preview",
     "Live model",

@@ -46,6 +46,7 @@ Expected result:
 ✓ Dependencies
 ✓ API key configuration
 ✓ AI Studio mode
+✓ Text model
 ✓ Live model
 ✓ Workshop checkpoints
 READY
@@ -60,10 +61,11 @@ cd checkpoints/01_basic
 uv run adk web
 ```
 
-Current ADK Web opens a Live API WebSocket even for the early typed-prompt
-exercise, so every checkpoint uses `gemini-3.1-flash-live-preview`. In
-checkpoints 00–02, type prompts and focus on instructions and tools. Starting
-with checkpoint 03, use the microphone and native audio.
+Checkpoints 00–02 use the stable text model `gemini-3.6-flash`. Type prompts
+with the send button; do not start the microphone/audio mode, because that
+opens `/run_live` and text-only models do not support the Live API. Checkpoint
+03 switches to `gemini-3.1-flash-live-preview` for microphone input and native
+audio.
 
 Tool agent:
 
@@ -105,7 +107,7 @@ Python exception or retry without asking.
 | `00_start` | Start here | Minimal agent; edit the instruction |
 | `01_basic` | Basic agent | Clear room-assistant behavior |
 | `02_tool` | Add a tool | Agent can call `find_rooms` |
-| `03_voice` | Enable voice | Use microphone input and native audio output |
+| `03_voice` | Enable voice | Switch to the Live API model and use the microphone |
 | `04_slow_failure` | Break it | Slow tool, timeout, and failure experiment |
 | `05_custom_streaming` | Look underneath | `run_live`, `LiveRequestQueue`, WebSocket, audio, events, transcription |
 
@@ -135,7 +137,7 @@ Open [http://localhost:8001](http://localhost:8001), click **Connect microphone*
 - **Certificate error on macOS:** set `SSL_CERT_FILE` using the command above.
 - **Quota/rate limit:** pair participants or switch to a participant-owned AI Studio key.
 - **Model not found:** verify `LIVE_MODEL` in `.env` against the current Live API model list. Preview model names can change.
-- **`not supported for bidiGenerateContent`:** a text-only model was configured. Set `LIVE_MODEL=gemini-3.1-flash-live-preview`, rerun preflight, and restart ADK Web.
+- **`not supported for bidiGenerateContent` in checkpoints 00–02:** microphone/audio mode was started with the text model. Start a new session and submit prompts with the text send button, or move to checkpoint 03 for voice.
 - **Someone is behind:** move directly to the next completed checkpoint.
 
 ## Sources
