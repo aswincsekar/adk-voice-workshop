@@ -40,6 +40,12 @@ check(
     "AI Studio mode",
     "set GOOGLE_GENAI_USE_ENTERPRISE=FALSE and GOOGLE_GENAI_USE_VERTEXAI=FALSE",
 )
+check(
+    os.getenv("LIVE_MODEL", "gemini-3.1-flash-live-preview")
+    == "gemini-3.1-flash-live-preview",
+    "Live model",
+    "set LIVE_MODEL=gemini-3.1-flash-live-preview in .env",
+)
 
 expected = [f"checkpoints/{name}" for name in [
     "00_start", "01_basic", "02_tool", "03_voice", "04_slow_failure", "05_custom_streaming"

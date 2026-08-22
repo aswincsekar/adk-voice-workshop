@@ -1,6 +1,6 @@
 # Building Voice Agents with Google ADK
 
-A guided Python workshop that goes from a tiny text agent to a real-time voice agent with tools, interruption, transcription, and failure handling.
+A guided Python workshop that goes from a tiny typed-prompt agent to a real-time voice agent with tools, interruption, transcription, and failure handling.
 
 ## Workshop slides
 
@@ -46,18 +46,24 @@ Expected result:
 ✓ Dependencies
 ✓ API key configuration
 ✓ AI Studio mode
+✓ Live model
 ✓ Workshop checkpoints
 READY
 ```
 
 ## Run a checkpoint
 
-Text agent:
+Typed-prompt checkpoint:
 
 ```bash
 cd checkpoints/01_basic
 uv run adk web
 ```
+
+Current ADK Web opens a Live API WebSocket even for the early typed-prompt
+exercise, so every checkpoint uses `gemini-3.1-flash-live-preview`. In
+checkpoints 00–02, type prompts and focus on instructions and tools. Starting
+with checkpoint 03, use the microphone and native audio.
 
 Tool agent:
 
@@ -99,7 +105,7 @@ Python exception or retry without asking.
 | `00_start` | Start here | Minimal agent; edit the instruction |
 | `01_basic` | Basic agent | Clear room-assistant behavior |
 | `02_tool` | Add a tool | Agent can call `find_rooms` |
-| `03_voice` | Enable voice | Switch to a Live API model |
+| `03_voice` | Enable voice | Use microphone input and native audio output |
 | `04_slow_failure` | Break it | Slow tool, timeout, and failure experiment |
 | `05_custom_streaming` | Look underneath | `run_live`, `LiveRequestQueue`, WebSocket, audio, events, transcription |
 
@@ -129,6 +135,7 @@ Open [http://localhost:8001](http://localhost:8001), click **Connect microphone*
 - **Certificate error on macOS:** set `SSL_CERT_FILE` using the command above.
 - **Quota/rate limit:** pair participants or switch to a participant-owned AI Studio key.
 - **Model not found:** verify `LIVE_MODEL` in `.env` against the current Live API model list. Preview model names can change.
+- **`not supported for bidiGenerateContent`:** a text-only model was configured. Set `LIVE_MODEL=gemini-3.1-flash-live-preview`, rerun preflight, and restart ADK Web.
 - **Someone is behind:** move directly to the next completed checkpoint.
 
 ## Sources

@@ -9,9 +9,5 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(REPO_ROOT / ".env")
 
 
-def text_model() -> str:
-    return os.getenv("TEXT_MODEL", "gemini-3.6-flash")
-
-
 def live_model() -> str:
     return os.getenv("LIVE_MODEL", "gemini-3.1-flash-live-preview")

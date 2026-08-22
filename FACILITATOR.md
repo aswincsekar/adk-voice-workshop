@@ -21,6 +21,10 @@
 - “Book it.” (The agent should clarify that this demo only finds rooms.)
 - Failure demo: “Find a room after one p.m.”
 
+All checkpoints use `gemini-3.1-flash-live-preview` because current ADK Web
+opens a Live API WebSocket. Keep checkpoints 00–02 as typed-prompt exercises;
+introduce microphone input and native audio at checkpoint 03.
+
 For checkpoint 04, “after one p.m.” means 13:00 and intentionally returns a
 structured failure after five seconds. The agent should acknowledge the wait,
 apologize briefly, and offer another time without exposing an exception or
