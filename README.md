@@ -3,9 +3,7 @@
 A guided Python workshop that goes from a tiny typed-prompt agent to a real-time voice agent with tools, interruption, transcription, and failure handling.
 
 ## Workshop slides
-
-- [PowerPoint deck](slides/google-adk-voice-agents-workshop.pptx) — downloadable/offline copy kept with the code
-- [Live Google Slides](https://docs.google.com/presentation/d/1n0RPi-yYbqH_e_r23KlJAldgGFxdpRez7lVCUqkLLc0/edit) — presentation version for the workshop
+- [Live Google Slides]([https://docs.google.com/presentation/d/1n0RPi-yYbqH_e_r23KlJAldgGFxdpRez7lVCUqkLLc0/edit](https://docs.google.com/presentation/d/1rO9ilaF21ZTv5zWEboJ0Th_qkVyTbKBRWPNS2K3-EFw/edit?usp=sharing)) — presentation version for the workshop
 
 ## What participants build
 
